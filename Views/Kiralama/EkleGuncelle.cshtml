@@ -1,0 +1,61 @@
+﻿@model Kiralama
+
+<form method="post" enctype="multipart/form-data">
+    @* Resim eklemek için enctype ekledik
+    *@
+    <div class="row">
+        <div class="col-10">
+
+            <div class="border p-3 my-5">
+                <div class="row pb-3">
+                    <h2 class="text-primary">@(Model == null ? "Yeni Kiralama" : "Kiralama Guncelle")</h2>
+                    </hr>
+                </div>
+
+                <div class="mb-3">
+                <label asp-for="OgrenciId" class="p-0"></label>
+                <input asp-for="OgrenciId" class="form-control" /> @* Aldığımız input u nesnenin içine koymaya yarar *@
+                <span asp-validation-for="OgrenciId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="KitapId" class="p-0"></label>
+                    @* asp-itemid="ViewBag.KitapTuruList" veriyi geçirmeye yarar *@
+                <select asp-for="KitapId" asp-items="ViewBag.KitapList" class="form-select">
+                    </select> @* Aldığımız input u nesnenin içine koymaya yarar *@
+                    <span asp-validation-for="KitapId" class="text-danger"></span>
+                </div>
+
+
+                @if (Model != null)
+                {
+                    <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Güncelle</button>
+                }
+                else
+                {
+
+                    <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Yeni Kiralama</button>
+                }
+
+                <a asp-controller="Kiralama" asp-action="Index" class="btn btn-lg btn-primary" style="width:250px">
+                    Kiralamalara Geri Dön
+                </a>
+
+            </div>
+        </div>
+        <div class="col-2">
+            @if (Model != null)
+            {
+                <br /> <br />
+                <img src="@Model.Kitap.ResimUrl" width="100%"
+                     style="border-radius:7px; border:1px solid #bbb9b9" />
+            }
+
+        </div>
+        
+
+    </div>
+
+
+
+
+</form>
